@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Invitation</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #fff5f7, #ffe8f0, #f0e8ff);
+    color: #333;
+    text-align: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px 30px;
+}
+
+.header {
+    animation: fadeInDown 0.8s ease-out;
+}
+
+h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+h2 {
+    font-weight: normal;
+    color: #c44569;
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+.decorative-line {
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, #ff6b9d, #c44569);
+    margin: 20px auto;
+    border-radius: 2px;
+}
+
+.box {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 30px 20px;
+    margin-top: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(196, 69, 105, 0.15);
+    backdrop-filter: blur(10px);
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.detail-item {
+    margin: 20px 0;
+    font-size: 18px;
+    transition: transform 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+}
+
+.detail-item:hover {
+    transform: scale(1.05);
+    color: #ff6b9d;
+}
+
+.detail-icon {
+    font-size: 28px;
+    margin-right: 10px;
+}
+
+.button-group {
+    margin-top: 40px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 14px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    color: white;
+    box-shadow: 0 8px 20px rgba(196, 69, 105, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(196, 69, 105, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: white;
+    color: #c44569;
+    border: 2px solid #c44569;
+    box-shadow: 0 8px 20px rgba(196, 69, 105, 0.2);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-3px);
+    background: #fff5f7;
+    box-shadow: 0 12px 30px rgba(196, 69, 105, 0.3);
+}
+
+.btn-secondary:active {
+    transform: translateY(-1px);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+    background: white;
+    margin: 5% auto;
+    padding: 40px 30px;
+    border-radius: 20px;
+    max-width: 500px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease-out;
+}
+
+.modal-content h3 {
+    color: #c44569;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.form-group {
+    margin: 20px 0;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ffe8f0;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #ff6b9d;
+}
+
+.close {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    color: #c44569;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover {
+    color: #ff6b9d;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 30px;
+    animation: fadeInUp 0.8s ease-out 0.6s both;
+}
+
+.gallery-item {
+    height: 150px;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #ffd4e5, #e5d4ff);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
+.success-message {
+    display: none;
+    background: linear-gradient(135deg, #4caf50, #45a049);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 36px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .container {
+        padding: 20px 15px;
+    }
+
+    .box {
+        padding: 20px 15px;
+    }
+
+    .button-group {
+        gap: 10px;
+    }
+
+    .btn {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>💕 Mohamed & Shahenda 💕</h1>
+        <h2>Wedding Invitation</h2>
+        <div class="decorative-line"></div>
+    </div>
+
+    <div class="box">
+        <div class="detail-item">
+            <span class="detail-icon">📅</span>
+            <span>25/6/2026</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-icon">🕘</span>
+            <span>9:00 PM</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-icon">📍</span>
+            <span>Sohag, Egypt</span>
+        </div>
+    </div>
+
+    <div class="gallery">
+        <div class="gallery-item" onclick="alert('💐 Beautiful Moments')">💐</div>
+        <div class="gallery-item" onclick="alert('🎵 Music & Celebration')">🎵</div>
+        <div class="gallery-item" onclick="alert('🍽️ Delicious Food')">🍽️</div>
+        <div class="gallery-item" onclick="alert('🎉 Fun & Joy')">🎉</div>
+    </div>
+
+    <div class="button-group">
+        <button class="btn btn-primary" onclick="openConfirmModal()">
+            ✓ Confirm Attendance
+        </button>
+        <button class="btn btn-secondary" onclick="openDeclineModal()">
+            ✗ Decline
+        </button>
+    </div>
+
+</div>
+
+<!-- Confirm Attendance Modal -->
+<div id="confirmModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeConfirmModal()">&times;</span>
+        <h3>Confirm Your Attendance</h3>
+        <form onsubmit="submitConfirm(event)">
+            <div class="form-group">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" required placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" required placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" placeholder="Enter your phone">
+            </div>
+            <div class="form-group">
+                <label for="guests">Number of Guests *</label>
+                <select id="guests" required>
+                    <option value="">Select number of guests</option>
+                    <option value="1">1 Guest</option>
+                    <option value="2">2 Guests</option>
+                    <option value="3">3 Guests</option>
+                    <option value="4">4 Guests</option>
+                    <option value="5">5+ Guests</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="message">Special Message</label>
+                <textarea id="message" rows="3" placeholder="Share your wishes and blessings..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+                Submit Response
+            </button>
+        </form>
+        <div class="success-message" id="successMessage">
+            ✓ Thank you! Your response has been recorded. We look forward to seeing you! 🎉
+        </div>
+    </div>
+</div>
+
+<!-- Decline Modal -->
+<div id="declineModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeDeclineModal()">&times;</span>
+        <h3>Sorry to Hear That</h3>
+        <form onsubmit="submitDecline(event)">
+            <div class="form-group">
+                <label for="declineName">Full Name *</label>
+                <input type="text" id="declineName" required placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+                <label for="declineEmail">Email *</label>
+                <input type="email" id="declineEmail" required placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="reason">Reason (Optional)</label>
+                <textarea id="reason" rows="3" placeholder="Please share why you can't attend..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-secondary" style="width: 100%; margin-top: 15px;">
+                Submit Decline
+            </button>
+        </form>
+        <div class="success-message" id="declineSuccessMessage">
+            ✓ Thank you for letting us know. We hope to see you next time! 💕
+        </div>
+    </div>
+</div>
+
+<script>
+    // Confirm Attendance Modal Functions
+    function openConfirmModal() {
+        document.getElementById('confirmModal').style.display = 'block';
+    }
+
+    function closeConfirmModal() {
+        document.getElementById('confirmModal').style.display = 'none';
+        document.getElementById('successMessage').style.display = 'none';
+    }
+
+    function submitConfirm(event) {
+        event.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const guests = document.getElementById('guests').value;
+        const message = document.getElementById('message').value;
+
+        console.log('Confirmed:', { name, email, guests, message });
+        
+        document.getElementById('successMessage').style.display = 'block';
+        setTimeout(() => {
+            closeConfirmModal();
+            document.getElementById('confirmModal').querySelector('form').reset();
+        }, 2000);
+    }
+
+    // Decline Modal Functions
+    function openDeclineModal() {
+        document.getElementById('declineModal').style.display = 'block';
+    }
+
+    function closeDeclineModal() {
+        document.getElementById('declineModal').style.display = 'none';
+        document.getElementById('declineSuccessMessage').style.display = 'none';
+    }
+
+    function submitDecline(event) {
+        event.preventDefault();
+        const name = document.getElementById('declineName').value;
+        const email = document.getElementById('declineEmail').value;
+        const reason = document.getElementById('reason').value;
+
+        console.log('Declined:', { name, email, reason });
+        
+        document.getElementById('declineSuccessMessage').style.display = 'block';
+        setTimeout(() => {
+            closeDeclineModal();
+            document.getElementById('declineModal').querySelector('form').reset();
+        }, 2000);
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+        const confirmModal = document.getElementById('confirmModal');
+        const declineModal = document.getElementById('declineModal');
+        
+        if (event.target === confirmModal) {
+            closeConfirmModal();
+        }
+        if (event.target === declineModal) {
+            closeDeclineModal();
+        }
+    }
+</script>
+
+</body>
+</html>
